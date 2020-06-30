@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import TaskPage from './components/TaskPage';
+import {createTask, setStatus} from "./actions";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    onCreateTask = ({ title, description }) => {
+        this.props.dispatch(createTask({ title,description }));
+    };
+    onSetStatus = ({ id, newStatus }) => {
+        console.log('App::onSetStatus: id, newStatus = ', id, newStatus);
+        this.props.dispatch(setStatus({ id, newStatus }));
+    };
+
+    render() {
+        console.log('props from App: ', this.props)
+        return (
+            <div className="main-content">
+                <TaskPage tasks={this.props.tasks}
+                          onCreateTask={this.onCreateTask}
+                          onSetStatus={this.onSetStatus}
+                />
+            </div>
+        );
+    }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    tasks: state.tasks
+  }
+}
+
+export default connect(mapStateToProps)(App);
