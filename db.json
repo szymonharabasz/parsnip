@@ -27,13 +27,13 @@
     {
       "title": "aaadfg",
       "description": "aaaaasdfd",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": 5
     },
     {
       "title": "Some title",
       "description": "Some description",
-      "status": "In Progress",
+      "status": "Completed",
       "id": 6
     },
     {
@@ -45,7 +45,7 @@
     {
       "title": "aaaa",
       "description": "wwww",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": 8
     },
     {

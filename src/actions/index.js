@@ -1,11 +1,5 @@
 import * as api from '../api';
 
-let _id = 1;
-
-export function uniqueId() {
-    return _id++;
-}
-
 export function createTaskSucceeded(task) {
     return {
         type: 'CREATE_TASK_SUCCEEDED',
@@ -39,16 +33,6 @@ export function editTask(params) {
         });
     };
 
-}
-
-export function setStatus({ id, newStatus }) {
-    return {
-        type: 'SET_STATUS',
-        payload: {
-            id,
-            newStatus
-        }
-    };
 }
 
 export function fetchTasksSucceeded(tasks) {
