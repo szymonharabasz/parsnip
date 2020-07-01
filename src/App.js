@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TaskPage from './components/TaskPage';
-import {createTask, setStatus} from "./actions";
+import {createTask, fetchTasks, editTask} from "./actions";
 
 class App extends Component {
+
+    componentDidMount() {
+        this.props.dispatch(fetchTasks());
+    }
 
     onCreateTask = ({ title, description }) => {
         this.props.dispatch(createTask({ title,description }));
     };
-    onSetStatus = ({ id, newStatus }) => {
-        console.log('App::onSetStatus: id, newStatus = ', id, newStatus);
-        this.props.dispatch(setStatus({ id, newStatus }));
+    onEditTask = (params) => {
+        this.props.dispatch(editTask(params));
     };
 
     render() {
-        console.log('props from App: ', this.props)
         return (
             <div className="main-content">
                 <TaskPage tasks={this.props.tasks}
                           onCreateTask={this.onCreateTask}
-                          onSetStatus={this.onSetStatus}
+                          onEditTask={this.onEditTask}
                 />
             </div>
         );

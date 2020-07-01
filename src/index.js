@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import tasks from './reducers';
+import { devToolsEnhancer } from "redux-devtools-extension";
 
-const store = createStore(tasks);
+const store = createStore(tasks, compose(applyMiddleware(thunk), devToolsEnhancer()));
 
 ReactDOM.render(
   <Provider store={store}>
@@ -20,3 +22,21 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+if (module.hot) {
+    module.hot.accept('./App', () => {
+        const NextApp = require('./App').default;
+
+        ReactDOM.render(
+            <Provider store={store}>
+                <NextApp/>
+            </Provider>,
+            document.getElementById('root')
+        );
+    });
+
+    module.hot.accept('./reducers', () => {
+        const nextRootReducer = require('./reducers').default;
+        store.replaceReducer(nextRootReducer);
+    });
+}

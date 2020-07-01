@@ -4,19 +4,19 @@ import StatusSelector from "./StatusSelector";
 class Task extends Component {
 
     onStatusChange = (status) => {
-        this.props.onSetStatus({
-            id: this.props.task.id,
-            newStatus: status });
+        this.props.onEditTask(
+            Object.assign({}, this.props.task, {status: status})
+        );
     };
 
     render() {
         return (
             <div className="task">
                 <div className="task-header">
-                    <div>{this.props.task.title}</div>
+                    <div><b><i>{this.props.task.title}</i></b></div>
                     <StatusSelector status={this.props.task.status} onStatusChange={this.onStatusChange}/>
                 </div>
-                <br/>
+                <hr/>
                 <div className="task-body">{this.props.task.description}</div>
             </div>
         );

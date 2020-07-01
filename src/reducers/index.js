@@ -1,42 +1,43 @@
-import { uniqueId } from "../actions";
+export default function tasks(state = { tasks: [] }, action) {
 
-const mockTasks = [
-  {
-    id: uniqueId(),
-    title: "Learn Redux",
-    description: "The store, actions and reducers, oh my!",
-    status: "In Progress",
-  },
-  {
-    id: uniqueId(),
-    title: "Peace on Earth",
-    description: "No big deal.",
-    status: "In Progress",
-  },
-];
-
-export default function tasks(state = { tasks: mockTasks }, action) {
-
-    if (action.type === 'CREATE_TASK') {
-      return { tasks: state.tasks.concat(action.payload) };
-    }
-    if (action.type === 'SET_STATUS') {
-      return {
-        tasks: state.tasks.map(task => {
-          if (task.id === action.payload.id) {
-            console.log(action.payload);
+    switch (action.type) {
+        case 'CREATE_TASK': {
+            return {tasks: state.tasks.concat(action.payload)};
+        }
+        case 'SET_STATUS': {
             return {
-              id: task.id,
-              title: task.title,
-              description: task.description,
-              status: action.payload.newStatus
+                tasks: state.tasks.map(task => {
+                    if (task.id === action.payload.id) {
+                        return Object.assign({}, task, {status: action.payload.newStatus} );
+                    } else {
+                        return task;
+                    }
+                })
             };
-          } else {
-            return task;
-          }
-        })
-      };
+        }
+        case 'FETCH_TASKS_SUCCEEDED': {
+            return {
+                tasks: action.payload.tasks
+            };
+        }
+        case 'CREATE_TASK_SUCCEEDED': {
+            return {
+                tasks: state.tasks.concat(action.payload.task)
+            };
+        }
+        case 'EDIT_TASK_SUCCEEDED': {
+            return {
+                tasks: state.tasks.map(task => {
+                    if (task.id === action.payload.params.id) {
+                        return action.payload.params;
+                    } else {
+                        return task;
+                    }
+                })
+            };
+        }
+        default: {
+            return state;
+        }
     }
-
-    return state;
 }
