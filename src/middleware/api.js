@@ -4,12 +4,12 @@ const API_BASE_URL = 'http://localhost:3001';
 
 export const CALL_API = 'CALL_API';
 
-function makeCall(endpoint) {
+function makeCall(endpoint, method = "GET", data = {}) {
     const url = `${API_BASE_URL}${endpoint}`;
 
-    return axios.get(url)
-        .then(resp => { return resp; })
-        .catch(err => { return err; });
+    return axios({
+        method, url, data, responseType: 'application/json'
+    });
 }
 
 const apiMiddleware = store => next => action => {
@@ -21,16 +21,22 @@ const apiMiddleware = store => next => action => {
     const [requestStartedType, successType, failureType] = callApi.types;
     next({type: requestStartedType});
 
-    return makeCall(callApi.endpoint).then(
-        response => next({
-            type: successType,
-            payload: response.data,
-        }),
-        error => next({
-            type: failureType,
-            error: error.message,
-        })
-    );
+    return makeCall(callApi.endpoint, callApi.method, callApi.data)
+        .then(
+            response => {
+                next({
+                    type: successType,
+                    payload: response.data,
+                })
+            })
+        .catch(
+            error => {
+                next({
+                    type: failureType,
+                    error: error.message,
+                })
+            }
+        );
 };
 
 export default apiMiddleware;

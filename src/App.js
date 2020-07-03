@@ -11,7 +11,7 @@ class App extends Component {
     }
 
     onCreateTask = ({ title, description }) => {
-        this.props.dispatch(createTask({ title,description }));
+        this.props.dispatch(createTask({ title, description, status: "Unstarted" }));
     };
     onEditTask = (params) => {
         this.props.dispatch(editTask(params));

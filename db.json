@@ -16,7 +16,7 @@
       "id": 3,
       "title": "Create Facebook for dogs.",
       "description": "The gooddest new social network.",
-      "status": "Unstarted"
+      "status": "In Progress"
     },
     {
       "title": "Do exercise from Chapter 4",
@@ -51,14 +51,30 @@
     {
       "title": "aaaaaa",
       "description": "qweertz",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": 9
     },
     {
       "title": "I don't know",
       "description": "But do something",
-      "status": "Unstarted",
+      "status": "Completed",
       "id": 10
+    },
+    {
+      "title": "Go to sleep",
+      "description": "Go to sleep",
+      "id": 11
+    },
+    {
+      "title": "Go to sleep",
+      "description": "Go to sleep",
+      "id": 12
+    },
+    {
+      "title": "Go to sleep",
+      "description": "Go to sleep",
+      "status": "In Progress",
+      "id": 13
     }
   ]
 }
