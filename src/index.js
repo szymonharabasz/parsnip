@@ -9,7 +9,13 @@ import thunk from 'redux-thunk';
 import tasks from './reducers';
 import { devToolsEnhancer } from "redux-devtools-extension";
 
-const store = createStore(tasks, compose(applyMiddleware(thunk), devToolsEnhancer()));
+const rootReducer = (state = {}, action) => {
+    return {
+        tasks: tasks(state.tasks, action),
+    }
+};
+
+const store = createStore(rootReducer, compose(applyMiddleware(thunk), devToolsEnhancer()));
 
 ReactDOM.render(
   <Provider store={store}>

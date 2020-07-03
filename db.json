@@ -16,12 +16,12 @@
       "id": 3,
       "title": "Create Facebook for dogs.",
       "description": "The gooddest new social network.",
-      "status": "Completed"
+      "status": "Unstarted"
     },
     {
       "title": "Do exercise from Chapter 4",
       "description": "But how?",
-      "status": "Completed",
+      "status": "Unstarted",
       "id": 4
     },
     {
@@ -39,7 +39,7 @@
     {
       "title": "Other task",
       "description": "It's description",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": 7
     },
     {
@@ -53,6 +53,12 @@
       "description": "qweertz",
       "status": "Unstarted",
       "id": 9
+    },
+    {
+      "title": "I don't know",
+      "description": "But do something",
+      "status": "Unstarted",
+      "id": 10
     }
   ]
 }
