@@ -44,7 +44,6 @@ class TaskPage extends Component {
     };
 
     renderTaskLists() {
-        console.log('props: ', this.props);
         const { tasks } = this.props;
         return TASK_STATUSES.map(status => {
             const statusTasks = tasks.filter(task => task.status === status);

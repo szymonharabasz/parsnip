@@ -6,7 +6,6 @@ const initialState = {
 
 
 export default function tasks(state = initialState, action) {
-
     switch (action.type) {
         case 'FETCH_TASKS_STARTED': {
             return {
@@ -15,11 +14,12 @@ export default function tasks(state = initialState, action) {
             };
         }
         case 'FETCH_TASKS_SUCCEEDED': {
-            return {
+            const newState = {
                 ...state,
                 isLoading: false,
-                tasks: action.payload.tasks
+                tasks: action.payload
             };
+            return newState;
         }
         case 'FETCH_TASKS_FAILED': {
             return {
