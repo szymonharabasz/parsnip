@@ -20,3 +20,7 @@ export function createTask(params) {
 export function editTask(params) {
     return client.put(`/tasks/${params.id}`, params);
 }
+
+export function deleteTask(id) {
+    return client.delete(`/tasks/${id}`);
+}

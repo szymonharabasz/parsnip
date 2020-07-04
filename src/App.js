@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TaskPage from './components/TaskPage';
 import FlashMessage from './components/FlashMessage';
-import {createTask, fetchTasks, editTask} from "./actions";
+import {createTask, fetchTasks, editTask, deleteTask} from "./actions";
 
 class App extends Component {
 
@@ -16,6 +16,9 @@ class App extends Component {
     onEditTask = (params) => {
         this.props.dispatch(editTask(params));
     };
+    onDeleteTask = (id) => {
+        this.props.dispatch(deleteTask(id));
+    };
 
     render() {
         return (
@@ -25,6 +28,7 @@ class App extends Component {
                     <TaskPage tasks={this.props.tasks}
                               onCreateTask={this.onCreateTask}
                               onEditTask={this.onEditTask}
+                              onDeleteTask={this.onDeleteTask}
                               isLoading={this.props.isLoading}
                     />
                 </div>

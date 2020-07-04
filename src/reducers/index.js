@@ -7,6 +7,8 @@ const initialState = {
 
 export default function tasks(state = initialState, action) {
 
+    console.log(action);
+
     switch (action.type) {
         case 'FETCH_TASKS_STARTED': {
             return {
@@ -43,6 +45,14 @@ export default function tasks(state = initialState, action) {
                         return task;
                     }
                 });
+            return {
+                ...state,
+                tasks: nextTasks,
+            };
+        }
+        case 'DELETE_TASK_SUCCEEDED': {
+            const { payload } = action;
+            const nextTasks = state.tasks.filter(task => task.id !== payload.id );
             return {
                 ...state,
                 tasks: nextTasks,

@@ -17,48 +17,6 @@
       "title": "Create Facebook for dogs.",
       "description": "The gooddest new social network.",
       "status": "Unstarted"
-    },
-    {
-      "title": "Do exercise from Chapter 4",
-      "description": "But how?",
-      "status": "Unstarted",
-      "id": 4
-    },
-    {
-      "title": "aaadfg",
-      "description": "aaaaasdfd",
-      "status": "In Progress",
-      "id": 5
-    },
-    {
-      "title": "Some title",
-      "description": "Some description",
-      "status": "Completed",
-      "id": 6
-    },
-    {
-      "title": "Other task",
-      "description": "It's description",
-      "status": "In Progress",
-      "id": 7
-    },
-    {
-      "title": "aaaa",
-      "description": "wwww",
-      "status": "In Progress",
-      "id": 8
-    },
-    {
-      "title": "aaaaaa",
-      "description": "qweertz",
-      "status": "Unstarted",
-      "id": 9
-    },
-    {
-      "title": "I don't know",
-      "description": "But do something",
-      "status": "Unstarted",
-      "id": 10
     }
   ]
 }

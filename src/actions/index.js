@@ -17,6 +17,23 @@ export function createTask({ title, description, status = 'Unstarted' }) {
     };
 }
 
+export function deleteTaskSucceeded(id) {
+    return {
+        type: 'DELETE_TASK_SUCCEEDED',
+        payload: {
+            id,
+        },
+    };
+}
+
+export function deleteTask(id) {
+    return dispatch => {
+        api.deleteTask(id).then(resp => {
+            dispatch(deleteTaskSucceeded(id));
+        });
+    };
+}
+
 export function editTaskSucceeded(params) {
     return {
         type: 'EDIT_TASK_SUCCEEDED',
@@ -56,9 +73,7 @@ export function fetchTasks() {
         dispatch(fetchTasksStarted());
         api.fetchTasks()
             .then(resp => {
-                setTimeout(() => {
-                    dispatch(fetchTasksSucceeded(resp.data));
-                }, 2000);
+                dispatch(fetchTasksSucceeded(resp.data));
             })
             .catch(err => {
                 dispatch(fetchTasksFailed(err.message));

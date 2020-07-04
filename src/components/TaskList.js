@@ -8,7 +8,12 @@ const TaskList = props => {
                 <strong>{props.status}</strong>
             </div>
             {props.tasks.map(task => {
-                return <Task key={task.id} task={task} onEditTask={props.onEditTask}/>;
+                return <Task
+                    key={task.id}
+                    task={task}
+                    onEditTask={props.onEditTask}
+                    onDeleteTask={props.onDeleteTask}
+                />;
             })}
         </div>
     );

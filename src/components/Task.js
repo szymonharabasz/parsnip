@@ -9,12 +9,27 @@ class Task extends Component {
         );
     };
 
+    onDeleteTask = () => {
+        this.props.onDeleteTask(this.props.task.id);
+    };
+
     render() {
         return (
             <div className="task">
                 <div className="task-header">
                     <div><b><i>{this.props.task.title}</i></b></div>
-                    <StatusSelector status={this.props.task.status} onStatusChange={this.onStatusChange}/>
+                    <div>
+                        <button
+                            className="button button-default button-tool">
+                            &#128393;
+                        </button>
+                        <button
+                            className="button button-default button-tool"
+                            onClick={this.onDeleteTask}>
+                            &#8856;
+                        </button>
+                        <StatusSelector status={this.props.task.status} onStatusChange={this.onStatusChange}/>
+                    </div>
                 </div>
                 <hr/>
                 <div className="task-body">{this.props.task.description}</div>
