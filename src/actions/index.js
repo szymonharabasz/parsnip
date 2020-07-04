@@ -52,40 +52,6 @@ export function editTask(params) {
 
 }
 
-function fetchTasksStarted() {
-    return {
-        type: 'FETCH_TASKS_STARTED',
-    }
-
-}
-
-export function fetchTasksSucceeded(tasks) {
-    return {
-        type: 'FETCH_TASKS_SUCCEEDED',
-        payload: {
-            tasks,
-        }
-    }
-}
-
 export function fetchTasks() {
-    return dispatch => {
-        dispatch(fetchTasksStarted());
-        api.fetchTasks()
-            .then(resp => {
-                dispatch(fetchTasksSucceeded(resp.data));
-            })
-            .catch(err => {
-                dispatch(fetchTasksFailed(err.message));
-            });
-    };
-}
-
-function fetchTasksFailed(error) {
-    return {
-        type: 'FETCH_TASKS_FAILED',
-        payload: {
-            error,
-        },
-    };
+    return { type: 'FETCH_TASKS_STARTED' };
 }
