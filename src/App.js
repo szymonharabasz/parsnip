@@ -14,6 +14,7 @@ class App extends Component {
         this.props.dispatch(createTask({ title,description }));
     };
     onEditTask = (params) => {
+        console.log('in onEditTask: ', params);
         this.props.dispatch(editTask(params));
     };
     onDeleteTask = (id) => {

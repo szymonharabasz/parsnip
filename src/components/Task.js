@@ -72,11 +72,9 @@ class Task extends Component {
                     </div>
                 </div>
                 <hr/>
-                {!this.state.editing &&
-                    <div className="task-body">{this.state.description}</div>
-                }
+                <div className="task-body">
+                {!this.state.editing && this.state.description}
                 {this.state.editing &&
-                    <div className="task-body">
                         <textarea rows="4"
                             className="in-place-input"
                             onChange={this.onDescriptionChange}
@@ -84,9 +82,9 @@ class Task extends Component {
                             type="text"
                             placeholder="description"
                         />
-                    </div>
-
                 }
+                <div className="task-timer">In Progress for {this.props.task.timer} s</div>
+                </div>
             </div>
         );
     }

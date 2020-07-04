@@ -9,9 +9,9 @@ export function createTaskSucceeded(task) {
     };
 }
 
-export function createTask({ title, description, status = 'Unstarted' }) {
+export function createTask({ title, description, status = 'Unstarted', timer = 0 }) {
     return dispatch => {
-        api.createTask({ title, description, status }).then(resp => {
+        api.createTask({ title, description, status, timer }).then(resp => {
             dispatch(createTaskSucceeded(resp.data));
         });
     };
@@ -43,15 +43,39 @@ export function editTaskSucceeded(params) {
     };
 }
 
+function getTaskById(tasks, id) {
+    tasks.find(task => task.id === id);
+}
+
 export function editTask(params) {
-    return dispatch => {
-        api.editTask(params).then(resp => {
+    const { id } = params;
+    console.log('in actions/editTask: ', id, params);
+    return (dispatch, getState) => {
+        const task = getTaskById(getState().tasks.tasks, id);
+        const updatedTask = {
+            ...task,
+            ...params
+        };
+        api.editTask(id, updatedTask).then(resp => {
             dispatch(editTaskSucceeded(resp.data));
+            if (resp.data.status === 'In Progress') {
+                dispatch(progressTimerStart(resp.data.id));
+            } else {
+                dispatch(progressTimerStop(resp.data.id));
+            }
         });
     };
-
 }
 
 export function fetchTasks() {
     return { type: 'FETCH_TASKS_STARTED' };
+}
+
+function progressTimerStart(taskId) {
+    return { type: 'TIMER_STARTED', payload: { taskId } };
+}
+
+function progressTimerStop(taskId) {
+    console.log("progressTimerStop, ", taskId);
+    return { type: 'TIMER_STOPPED', payload: { taskId } };
 }

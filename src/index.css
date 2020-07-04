@@ -114,15 +114,17 @@ hr {
   margin-bottom: 30px;
   text-align: right;
 }
-
-
+.task-timer {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: right;
+}
 .tasks-loading {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
-
 .flash-error {
   text-align: center;
   padding: 25px;
@@ -130,7 +132,6 @@ hr {
   border-color: #ebcccc;
   color: #a94442;
 }
-
 .in-place-input {
   padding: 0px;
   width: 100%;
