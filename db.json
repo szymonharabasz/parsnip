@@ -13,10 +13,10 @@
       "status": "Completed"
     },
     {
-      "id": 3,
-      "title": "Create Facebook for dogs.",
-      "description": "The gooddest new social network.",
-      "status": "Unstarted"
+      "title": "Create Facebook for dogs",
+      "description": "Gooddest social network ever!",
+      "status": "Unstarted",
+      "id": 3
     }
   ]
 }

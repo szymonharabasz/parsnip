@@ -2,11 +2,39 @@ import React, { Component } from 'react';
 import StatusSelector from "./StatusSelector";
 
 class Task extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            editing: false,
+            title: this.props.task.title,
+            description: this.props.task.description,
+        };
+    }
+    onEditing = () => {
+        if (this.state.editing) {
+            this.props.onEditTask(
+                Object.assign({}, this.props.task, {
+                    title: this.state.title,
+                    description: this.state.description,
+                })
+            );
+        }
+        this.setState({editing: !this.state.editing});
+    };
 
     onStatusChange = (status) => {
         this.props.onEditTask(
             Object.assign({}, this.props.task, {status: status})
         );
+    };
+
+    onTitleChange = (e) => {
+        this.setState({ title: e.target.value });
+    };
+
+    onDescriptionChange = (e) => {
+        this.setState({ description: e.target.value });
     };
 
     onDeleteTask = () => {
@@ -17,10 +45,22 @@ class Task extends Component {
         return (
             <div className="task">
                 <div className="task-header">
-                    <div><b><i>{this.props.task.title}</i></b></div>
+                    {this.state.editing &&
+                        <input
+                            className="in-place-input"
+                            onChange={this.onTitleChange}
+                            value={this.state.title}
+                            type="text"
+                            placeholder="title"
+                        />
+                    }
+                    {!this.state.editing &&
+                        <div><b><i>{this.props.task.title}</i></b></div>
+                    }
                     <div>
                         <button
-                            className="button button-default button-tool">
+                            className="button button-default button-tool"
+                            onClick={this.onEditing}>
                             &#128393;
                         </button>
                         <button
@@ -32,7 +72,21 @@ class Task extends Component {
                     </div>
                 </div>
                 <hr/>
-                <div className="task-body">{this.props.task.description}</div>
+                {!this.state.editing &&
+                    <div className="task-body">{this.state.description}</div>
+                }
+                {this.state.editing &&
+                    <div className="task-body">
+                        <textarea rows="4"
+                            className="in-place-input"
+                            onChange={this.onDescriptionChange}
+                            value={this.state.description}
+                            type="text"
+                            placeholder="description"
+                        />
+                    </div>
+
+                }
             </div>
         );
     }
