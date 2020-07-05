@@ -30,6 +30,7 @@ export function deleteTask(id) {
     return dispatch => {
         api.deleteTask(id).then(resp => {
             dispatch(deleteTaskSucceeded(id));
+            dispatch(progressTimerStop(id))
         });
     };
 }

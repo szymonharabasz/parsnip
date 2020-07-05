@@ -1,4 +1,5 @@
-import { takeLatest, call, put, take, delay, actionChannel } from 'redux-saga/effects';
+import { channel, delay } from "redux-saga";
+import { takeLatest, call, put, take } from 'redux-saga/effects';
 import * as api from './api';
 
 export default function* rootSaga() {
@@ -23,9 +24,10 @@ function* fetchTasks() {
 }
 
 function* handleProgressTimer({ payload, type }) {
+    console.log(payload, type)
     if (type === 'TIMER_STARTED') {
         while (true) {
-            yield delay(1000);
+            yield call(delay, 1000);
             yield put({
                 type: 'TIMER_INCREMENT',
                 payload: {taskId: payload.taskId},
@@ -41,10 +43,13 @@ function* takeLatestById(actionTypes, saga) {
         const action = yield take(actionTypes);
         const { taskId } = action.payload;
 
+        console.log("before: ", chanelsMap);
         if (!chanelsMap[taskId]) {
-            chanelsMap[taskId] = yield actionChannel(actionTypes);
+            chanelsMap[taskId] = channel();
             yield takeLatest(chanelsMap[taskId], saga);
         }
         yield put(chanelsMap[taskId], action);
+
+        console.log("after: ", chanelsMap, action);
     }
 }

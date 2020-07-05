@@ -30,17 +30,11 @@ class TaskPage extends Component {
         })
     }
 
-    onCreateTask = (e) => {
-        e.preventDefault();
+    onCreateTask = () => {
         this.props.onCreateTask({
-            title: this.state.title,
-            description: this.state.description,
+            title: '',
+            description: '',
         });
-        this.resetForm();
-    };
-
-    toggleForm = () => {
-        this.setState({showNewCardForm: !this.state.showNewCardForm});
     };
 
     onSearch = e => {
@@ -81,35 +75,9 @@ class TaskPage extends Component {
                         />
                     </div>
                     <button className="button button-default"
-                            onClick={this.toggleForm}>
+                            onClick={this.onCreateTask}>
                         + New Task
                     </button>
-                </div>
-                <div className="task-list-header">
-                    {this.state.showNewCardForm && (
-                        <form className="new-task-form" onSubmit={this.onCreateTask}>
-                            <input
-                                className="full-width-input"
-                                onChange={this.onTitleChange}
-                                value={this.state.title}
-                                type="text"
-                                placeholder="title"
-                            />
-                            <input
-                                className="full-width-input"
-                                onChange={this.onDescriptionChange}
-                                value={this.state.description}
-                                type="text"
-                                placeholder="description"
-                            />
-                            <button
-                                className="button"
-                                type="submit"
-                            >
-                                Save
-                            </button>
-                        </form>
-                    )}
                 </div>
                 <div className="tasks-lists">
                     {this.renderTaskLists()}

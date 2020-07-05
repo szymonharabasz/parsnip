@@ -30,7 +30,7 @@ export const getGroupedByStatus = createSelector(
 
 export default function tasks(state = initialState, action) {
 
-   // console.log(action);
+    //console.log(action);
 
     switch (action.type) {
         case 'FETCH_TASKS_STARTED': {

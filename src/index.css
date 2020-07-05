@@ -52,8 +52,10 @@ hr {
 }
 
 .button-tool {
-  padding: 2px;
+  padding: 0px;
   background-color: #f2f2f2;
+  border-radius: 0px;
+  font-size: 20px;
 }
 
 /* layout */
@@ -82,7 +84,7 @@ hr {
 /* Task */
 .task {
   margin-bottom: 15px;
-  background: #fff;
+  background: honeydew;
   box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.24);
 }
 
@@ -90,14 +92,21 @@ hr {
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: left;
+  flex-direction: column;
 }
-
 .task-body {
   padding: 10px 20px;
   min-height: 60px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+.task-toolbar {
+  display: flex;
+  margin-bottom: 5%;
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 
@@ -146,4 +155,12 @@ hr {
   width: 100%;
   height: 100%;
   font-family: sans-serif;
+  border: none;
+}
+.in-place-input:focus {
+  border: none;
+  outline: none;
+}
+.in-place-input-title {
+  font-weight: bold;
 }
