@@ -17,6 +17,17 @@ export const getFilteredTasks = createSelector(
     }
 );
 
+const TASK_STATUSES = [ "Unstarted", "In Progress", "Completed" ];
+
+export const getGroupedByStatus = createSelector(
+    [getFilteredTasks],
+    tasks => TASK_STATUSES.map(status => {
+        return {status: status, tasks: tasks.filter(task => task.status === status)}
+    })
+);
+
+
+
 export default function tasks(state = initialState, action) {
 
    // console.log(action);
