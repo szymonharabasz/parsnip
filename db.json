@@ -1,23 +1,25 @@
 {
   "tasks": [
     {
+      "title": "Learn Redux",
+      "description": "The store, actions and reducers, oh my!",
+      "status": "Unstarted",
+      "timer": 0,
       "id": 1
     },
     {
+      "title": "Learn French",
+      "description": "Je m'appelle Simon.",
+      "status": "In Progress",
+      "timer": 0,
       "id": 2
     },
     {
+      "title": "Create Facebook for dogs",
+      "description": "The gooddest social network ever!",
+      "status": "Unstarted",
+      "timer": 0,
       "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "title": "aaa",
-      "description": "yyy",
-      "status": "Completed",
-      "timer": 156,
-      "id": 5
     }
   ]
 }

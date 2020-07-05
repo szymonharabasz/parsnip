@@ -113,6 +113,8 @@ hr {
 .task-list-header {
   margin-bottom: 30px;
   text-align: right;
+  justify-content: space-between;
+  display: flex;
 }
 .task-timer {
   font-size: 12px;

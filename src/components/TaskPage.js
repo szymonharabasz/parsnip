@@ -43,6 +43,10 @@ class TaskPage extends Component {
         this.setState({ showNewCardForm: !this.state.showNewCardForm });
     };
 
+    onSearch = e => {
+        this.props.onSearch(e.target.value);
+    };
+
     renderTaskLists() {
         const { tasks } = this.props;
         return TASK_STATUSES.map(status => {
@@ -68,6 +72,14 @@ class TaskPage extends Component {
         return (
             <div className="tasks">
                 <div className="task-list-header">
+                    <div>
+                    <input
+                        onChange={this.onSearch}
+                        className="input-search"
+                        type="text"
+                        placeholder="Search..."
+                    />
+                    </div>
                     <button className="button button-default"
                             onClick={this.toggleForm}>
                         + New Task

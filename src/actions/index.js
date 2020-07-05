@@ -71,6 +71,10 @@ export function fetchTasks() {
     return { type: 'FETCH_TASKS_STARTED' };
 }
 
+export function filterTasks(searchTerm) {
+    return { type: 'FILTER_TASKS', payload: { searchTerm } };
+}
+
 function progressTimerStart(taskId) {
     return { type: 'TIMER_STARTED', payload: { taskId } };
 }
