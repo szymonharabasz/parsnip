@@ -1,18 +1,68 @@
 {
+  "projects": [
+    {
+      "id": 1,
+      "name": "Short-term goals"
+    },
+    {
+      "id": 2,
+      "name": "Long-term goals"
+    }
+  ],
   "tasks": [
     {
-      "title": "",
-      "description": "",
+      "title": "Learn Redux",
+      "description": "The store, actions, and reducers, oh my!",
       "status": "In Progress",
       "timer": 103,
-      "id": 1
+      "id": 1,
+      "projectId": 1
+    },
+    {
+      "title": "Peace on Earth",
+      "description": "No big deal.",
+      "status": "Completed",
+      "timer": 64,
+      "id": 2,
+      "projectId": 2
+    },
+    {
+      "title": "Learn French",
+      "description": "Je m'appelle Simon.",
+      "status": "Completed",
+      "timer": 103,
+      "id": 3,
+      "projectId": 1
+    },
+    {
+      "title": "Create Facebook for dogs",
+      "description": "The gooddest new social network ever!",
+      "status": "In Progress",
+      "timer": 64,
+      "id": 4,
+      "projectId": 2
     },
     {
       "title": "",
       "description": "",
-      "status": "In Progress",
-      "timer": 64,
-      "id": 2
+      "status": "Unstarted",
+      "timer": 0,
+      "id": 5
+    },
+    {
+      "title": "",
+      "description": "",
+      "status": "Unstarted",
+      "timer": 0,
+      "id": 6
+    },
+    {
+      "title": "abcxxx",
+      "description": "def",
+      "status": "Unstarted",
+      "timer": 0,
+      "projectId": 2,
+      "id": 7
     }
   ]
 }

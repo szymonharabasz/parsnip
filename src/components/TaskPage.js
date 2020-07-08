@@ -34,6 +34,7 @@ class TaskPage extends Component {
         this.props.onCreateTask({
             title: '',
             description: '',
+            projectId: this.props.currentProjectId,
         });
     };
 

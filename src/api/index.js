@@ -24,3 +24,7 @@ export function editTask(id, params) {
 export function deleteTask(id) {
     return client.delete(`/tasks/${id}`);
 }
+
+export function fetchProjects() {
+    return client.get('/projects?_embed=tasks');
+}

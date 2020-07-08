@@ -6,14 +6,16 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import tasks from './reducers';
+import { projects, tasks, page } from "./reducers";
 import { devToolsEnhancer } from "redux-devtools-extension";
 import createSageMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 
 const rootReducer = (state = {}, action) => {
     return {
+        projects: projects(state.projects, action),
         tasks: tasks(state.tasks, action),
+        page: page(state.page, action)
     }
 };
 
