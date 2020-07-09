@@ -17,7 +17,6 @@ const initialTasksState = {
     error: null,
 };
 
-const getTasks = state => state.tasks.tasks;
 const getSearchTerm = state => state.page.searchTerm;
 
 export const getTasksByProjectId = state => {
@@ -28,6 +27,8 @@ export const getTasksByProjectId = state => {
     }
 
     const taskIds = state.projects.items[currentProjectId].tasks;
+    console.log("taksIds: ", taskIds);
+    console.log("tasks: ", taskIds.map(id => state.tasks.items[id]));
 
     return taskIds.map(id => state.tasks.items[id]);
 };
@@ -54,7 +55,7 @@ export const getProjects = state => {
     });
 };
 
-export function tasks(state = initialState, action) {
+export function tasks(state = initialTasksState, action) {
 
     //console.log(action);
 
@@ -102,21 +103,24 @@ export function tasks(state = initialState, action) {
                 });
             return {
                 ...state,
-                tasks: nextTasks,
+                items: nextTasks,
             };
         }
         case 'TIMER_INCREMENT': {
-            const nextTasks = Object.keys(state.items).map(taskId => {
-                const task = state.items[taskId];
+            console.log('In TIMER_INCREMENT: ', state.items);
+            const {taskId} = action.payload;
+            const task = state.items[taskId];
 
-                if (task.id === action.payload.taskId) {
-                    return {...task, timer: task.timer + 1};
+            return {
+                ...state,
+                items: {
+                    ...state.items,
+                    [taskId]: {
+                        ...task,
+                        timer: task.timer + 1
+                    }
                 }
-
-                return task;
-            });
-
-            return {...state, tasks: nextTasks};
+            };
         }
         default: {
             return state;
@@ -170,16 +174,20 @@ export function projects(state = initialState, action) {
             const {taskId, projectId} = action.payload;
             const project = state.items[projectId];
             const nextTasks = project.tasks.filter(id => taskId !== id);
-            return {
+            console.log("In projects reducer: ", project.items);
+            console.log("In projects reducer: ", nextTasks);
+            const nextState =  {
                 ...state,
                 items: {
                     ...state.items,
-                    projectId: {
+                    [projectId]: {
                         ...project,
                         tasks: nextTasks
                     }
                 }
             };
+            console.log("nextState: ", nextState);
+            return nextState;
         }
         default: {
             return state;

@@ -56,12 +56,6 @@ export function editTaskSucceeded(task) {
     };
 }
 
-function getTaskById(tasks, id) {
-    console.log("tasks are ", typeof tasks);
-    console.log("tasks: ", tasks);
-    tasks.find(task => task.id === id);
-}
-
 export function editTask(params) {
     const { id } = params;
     console.log('in actions/editTask: ', id, params);
@@ -92,10 +86,6 @@ export function filterTasks(searchTerm) {
 
 function fetchProjectsStarted(boards) {
     return { type: 'FETCH_PROJECTS_STARTED', payload: { boards } };
-}
-
-function fetchProjectsSucceeded(projects) {
-    return { type: 'FETCH_PROJECTS_SUCCEEDED', payload: { projects } };
 }
 
 function fetchProjectsFailed(err) {

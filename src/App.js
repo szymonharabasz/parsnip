@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TaskPage from './components/TaskPage';
 import FlashMessage from './components/FlashMessage';
 import Header from './components/Header';
-import {createTask, fetchTasks, editTask, deleteTask, filterTasks, fetchProjects, setCurrentProjectId} from "./actions";
+import {createTask, editTask, deleteTask, filterTasks, fetchProjects, setCurrentProjectId} from "./actions";
 import { getGroupedByStatus, getProjects } from "./reducers";
 
 class App extends Component {
