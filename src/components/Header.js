@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class Header extends Component {
     render() {
@@ -9,11 +9,15 @@ class Header extends Component {
         );
 
         return (
-            <div className="project-item">
-                Project:
-                <select onChange={this.props.onCurrentProjectChange} className="project-menu">
-                    {projectOptions}
-                </select>
+            <div className="page-header-container">
+                <div className="page-header">
+                    <div className="project-item">
+                        Project:
+                        <select onChange={this.props.onCurrentProjectChange} className="project-menu">
+                            {projectOptions}
+                        </select>
+                    </div>
+                </div>
             </div>
         );
     }

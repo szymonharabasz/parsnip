@@ -12,9 +12,9 @@
   "tasks": [
     {
       "title": "Learn Redux",
-      "description": "The store, actions, and reducers, oh my!",
+      "description": "The store, actions, and reducers, oh my!!!",
       "status": "Completed",
-      "timer": 103,
+      "timer": 114,
       "id": 1,
       "projectId": 1
     },
