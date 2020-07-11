@@ -19,14 +19,6 @@ class TaskPage extends Component {
         };
     }
 
-    onTitleChange = (e) => {
-        this.setState({title: e.target.value});
-    };
-
-    onDescriptionChange = (e) => {
-        this.setState({description: e.target.value});
-    };
-
     resetForm() {
         this.setState({
             showNewCardForm: false,

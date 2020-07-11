@@ -22,18 +22,25 @@ const getSearchTerm = state => state.page.searchTerm;
 export const getTasksByProjectId = state => {
     const { currentProjectId } = state.page;
 
+    console.log("currentProjectId: ", currentProjectId);
+
     if (!currentProjectId || !state.projects.items[currentProjectId]) {
         return [];
     }
 
     const taskIds = state.projects.items[currentProjectId].tasks;
+    console.log("taskIds: ", taskIds);
 
-    return taskIds.map(id => state.tasks.items[id]);
+    const result = taskIds.map(id => state.tasks.items[id]);
+    console.log("here items: ", state.tasks.items);
+    console.log("result: ", result);
+    return result;
 };
 
 export const getFilteredTasks = createSelector(
     [getTasksByProjectId, getSearchTerm],
     (tasks, searchTerm) => {
+        console.log("tasks: ", tasks);
         return tasks.filter(task => task.title.match(new RegExp(searchTerm, 'i')));
     }
 );
@@ -98,15 +105,20 @@ export function tasks(state = initialTasksState, action) {
         }
         case 'DELETE_TASK_SUCCEEDED': {
             const {taskId} = action.payload;
+            console.log("action.payload: ", action.payload);
+            console.log("state.items: ", state.items);
             const nextTasks = Object.keys(state.items)
                 .filter(id => id !== taskId)
                 .map(id => {
-                    return { ...state.items[id] };
-                });
-            return {
+                    return { [id]: state.items[id] };
+                })
+                .reduce((accumulator, current) => Object.assign({}, accumulator, current));
+            const result = {
                 ...state,
-                items: nextTasks,
+                items: { ...nextTasks },
             };
+            console.log("nextTasks:", nextTasks);
+            return result;
         }
         case 'TIMER_INCREMENT': {
             const {taskId} = action.payload;

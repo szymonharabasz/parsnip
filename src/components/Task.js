@@ -12,15 +12,6 @@ class Task extends Component {
         };
     }
 
-    onEditing = () => {
-        this.props.onEditTask(
-            Object.assign({}, this.props.task, {
-                title: this.state.title,
-                description: this.state.description,
-            })
-        );
-    };
-
     onStatusChange = (status) => {
         this.props.onEditTask(
             Object.assign({}, this.props.task, {status: status})
@@ -68,8 +59,6 @@ class Task extends Component {
                               placeholder="title"
                     />
                     </div>
-
-
                 </div>
                 <hr/>
                 <div className="task-body">

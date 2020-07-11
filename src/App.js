@@ -3,17 +3,13 @@ import { connect } from 'react-redux';
 import TaskPage from './components/TaskPage';
 import FlashMessage from './components/FlashMessage';
 import Header from './components/Header';
-import {createTask, editTask, deleteTask, filterTasks, fetchProjects } from "./actions";
+import { editTask, deleteTask, filterTasks, fetchProjects } from "./actions";
 
 class App extends Component {
 
     componentDidMount() {
         this.props.dispatch(fetchProjects());
     }
-
-    onCreateTask = ({ title, description, projectId }) => {
-        this.props.dispatch(createTask({ title,description, projectId }));
-    };
     onEditTask = (params) => {
         this.props.dispatch(editTask(params));
     };
