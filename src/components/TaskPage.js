@@ -2,45 +2,19 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import TaskList from './TaskList';
-import { createTask, editTask, filterTasks, deleteTask } from "../actions";
+import { createTask, filterTasks } from "../actions";
 import { getGroupedByStatus } from "../reducers";
 
-
-const TASK_STATUSES = ["Unstarted", "In Progress", "Completed"];
-
 class TaskPage extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            showNewCardForm: false,
-            title: '',
-            description: '',
-        };
-    }
-
-    resetForm() {
-        this.setState({
-            showNewCardForm: false,
-            title: '',
-            description: '',
-        })
-    }
 
     onCreateTask = e => {
         e.preventDefault();
 
         this.props.createTask({
-            title: this.state.title,
-            description: this.state.description,
+            title: '',
+            description: '',
             projectId: this.props.currentProjectId,
         });
-
-        this.resetForm();
-    };
-
-    onStatusChange = (task, status) => {
-        this.props.editTask(task, { status });
     };
 
     onSearch = e => {
@@ -57,9 +31,6 @@ class TaskPage extends Component {
                 key={status}
                 status={status}
                 tasks={tasksByStatus}
-                onStautusChange={this.onStatusChange}
-                onEditTask={this.props.editTask}
-                onDeleteTask={this.props.deleteTask}
             />);
         });
     }
@@ -113,12 +84,9 @@ function mapDispatchToProps(dispatch) {
         {
             onSearch: filterTasks,
             createTask,
-            editTask,
-            deleteTask
         },
         dispatch
     );
 }
 
-export {TASK_STATUSES};
 export default connect(mapStateToProps, mapDispatchToProps)(TaskPage);

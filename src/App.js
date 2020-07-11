@@ -3,19 +3,13 @@ import { connect } from 'react-redux';
 import TaskPage from './components/TaskPage';
 import FlashMessage from './components/FlashMessage';
 import Header from './components/Header';
-import { editTask, deleteTask, filterTasks, fetchProjects } from "./actions";
+import { filterTasks, fetchProjects } from "./actions";
 
 class App extends Component {
 
     componentDidMount() {
         this.props.dispatch(fetchProjects());
     }
-    onEditTask = (params) => {
-        this.props.dispatch(editTask(params));
-    };
-    onDeleteTask = (id) => {
-        this.props.dispatch(deleteTask(id, this.props.currentProjectId));
-    };
     onSearch = searchTerm => {
         this.props.dispatch(filterTasks(searchTerm));
     };
@@ -38,4 +32,5 @@ function mapStateToProps(state) {
     return { error };
 }
 
+export const TASK_STATUSES = ["Unstarted", "In Progress", "Completed"];
 export default connect(mapStateToProps)(App);

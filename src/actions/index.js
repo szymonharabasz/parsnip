@@ -66,17 +66,15 @@ export function editTask(params) {
         };
         api.editTask(id, updatedTask).then(resp => {
             dispatch(editTaskSucceeded(resp.data));
-            if (resp.data.status === 'In Progress') {
-                dispatch(progressTimerStart(resp.data.id));
-            } else {
-                dispatch(progressTimerStop(resp.data.id));
+            if (task.status !== updatedTask.status) {
+                if (resp.data.status === 'In Progress') {
+                    dispatch(progressTimerStart(resp.data.id));
+                } else {
+                    dispatch(progressTimerStop(resp.data.id));
+                }
             }
         });
     };
-}
-
-export function fetchTasks() {
-    return { type: 'FETCH_TASKS_STARTED' };
 }
 
 export function filterTasks(searchTerm) {

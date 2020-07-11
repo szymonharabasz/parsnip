@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TASK_STATUSES } from './TaskPage';
+import { TASK_STATUSES } from '../App';
 
 class StatusSelector extends Component {
 

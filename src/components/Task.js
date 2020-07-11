@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
 import StatusSelector from "./StatusSelector";
+import {bindActionCreators} from "redux";
+import {deleteTask, editTask} from "../actions";
 
 class Task extends Component {
     constructor(props) {
@@ -13,13 +16,13 @@ class Task extends Component {
     }
 
     onStatusChange = (status) => {
-        this.props.onEditTask(
+        this.props.editTask(
             Object.assign({}, this.props.task, {status: status})
         );
     };
 
     onTitleChange = (e) => {
-        this.props.onEditTask(
+        this.props.editTask(
             Object.assign({}, this.props.task, {
                 title: e.target.value,
             })
@@ -27,7 +30,7 @@ class Task extends Component {
     };
 
     onDescriptionChange = (e) => {
-        this.props.onEditTask(
+        this.props.editTask(
             Object.assign({}, this.props.task, {
                 description: e.target.value,
             })
@@ -35,10 +38,11 @@ class Task extends Component {
     };
 
     onDeleteTask = () => {
-        this.props.onDeleteTask(this.props.task.id, this.props.task.projectId);
+        this.props.deleteTask(this.props.task.id, this.props.task.projectId);
     };
 
     render() {
+        console.log("Rendering task: ", this.props.task.id);
         return (
             <div className="task">
                 <div className="task-header">
@@ -76,4 +80,21 @@ class Task extends Component {
     }
 }
 
-export default Task;
+function mapStateToProps(state, ownProps) {
+    return {
+        task: state.tasks.items[ownProps.taskId]
+    };
+}
+
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(
+        {
+            editTask,
+            deleteTask
+        },
+        dispatch
+    );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Task);
