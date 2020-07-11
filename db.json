@@ -12,16 +12,16 @@
   "tasks": [
     {
       "title": "Learn Redux",
-      "description": "The store, actions, and reducers, oh my!!!",
+      "description": "The store, actions, and reducers, oh my!...",
       "status": "Completed",
-      "timer": 114,
+      "timer": 128,
       "id": 1,
       "projectId": 1
     },
     {
       "title": "Peace on Earth",
       "description": "No big deal.",
-      "status": "Completed",
+      "status": "Unstarted",
       "timer": 64,
       "id": 2,
       "projectId": 2

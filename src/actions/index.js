@@ -58,7 +58,6 @@ export function editTaskSucceeded(task) {
 
 export function editTask(params) {
     const { id } = params;
-    console.log('in actions/editTask: ', id, params);
     return (dispatch, getState) => {
         const task = getState().tasks.items[id];
         const updatedTask = {
@@ -110,7 +109,6 @@ export function fetchProjects() {
             })
             .catch(err => {
                 console.error(err);
-
                 dispatch(fetchProjectsFailed(err));
             });
     }
@@ -125,6 +123,5 @@ function progressTimerStart(taskId) {
 }
 
 function progressTimerStop(taskId) {
-    console.log("progressTimerStop, ", taskId);
     return { type: 'TIMER_STOPPED', payload: { taskId } };
 }

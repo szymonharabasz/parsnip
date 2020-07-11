@@ -27,8 +27,6 @@ export const getTasksByProjectId = state => {
     }
 
     const taskIds = state.projects.items[currentProjectId].tasks;
-    console.log("taksIds: ", taskIds);
-    console.log("tasks: ", taskIds.map(id => state.tasks.items[id]));
 
     return taskIds.map(id => state.tasks.items[id]);
 };
@@ -49,15 +47,19 @@ export const getGroupedByStatus = createSelector(
     })
 );
 
-export const getProjects = state => {
-    return Object.keys(state.projects.items).map(id => {
-        return state.projects.items[id];
+export const getProjects = createSelector(
+    [state => state.projects],
+    projects => {
+        return Object.keys(projects.items).map(id => {
+            return projects.items[id];
+        });
     });
-};
+
+
 
 export function tasks(state = initialTasksState, action) {
 
-    //console.log(action);
+    console.log(action);
 
     switch (action.type) {
         case 'RECEIVE_ENTITIES': {
@@ -107,7 +109,6 @@ export function tasks(state = initialTasksState, action) {
             };
         }
         case 'TIMER_INCREMENT': {
-            console.log('In TIMER_INCREMENT: ', state.items);
             const {taskId} = action.payload;
             const task = state.items[taskId];
 
@@ -157,7 +158,6 @@ export function projects(state = initialState, action) {
         }
         case 'CREATE_TASK_SUCCEEDED': {
             const { task } = action.payload;
-            console.log("create task payload ", action.payload);
             const project = state.items[task.projectId];
             return {
                 ...state,
@@ -174,8 +174,6 @@ export function projects(state = initialState, action) {
             const {taskId, projectId} = action.payload;
             const project = state.items[projectId];
             const nextTasks = project.tasks.filter(id => taskId !== id);
-            console.log("In projects reducer: ", project.items);
-            console.log("In projects reducer: ", nextTasks);
             const nextState =  {
                 ...state,
                 items: {
@@ -186,7 +184,6 @@ export function projects(state = initialState, action) {
                     }
                 }
             };
-            console.log("nextState: ", nextState);
             return nextState;
         }
         default: {

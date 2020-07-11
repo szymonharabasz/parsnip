@@ -24,7 +24,6 @@ function* fetchTasks() {
 }
 
 function* handleProgressTimer({ payload, type }) {
-    console.log(payload, type)
     if (type === 'TIMER_STARTED') {
         while (true) {
             yield call(delay, 1000);
@@ -43,13 +42,10 @@ function* takeLatestById(actionTypes, saga) {
         const action = yield take(actionTypes);
         const { taskId } = action.payload;
 
-        console.log("before: ", chanelsMap);
         if (!chanelsMap[taskId]) {
             chanelsMap[taskId] = channel();
             yield takeLatest(chanelsMap[taskId], saga);
         }
         yield put(chanelsMap[taskId], action);
-
-        console.log("after: ", chanelsMap, action);
     }
 }

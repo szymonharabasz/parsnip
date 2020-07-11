@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import TaskList from './TaskList';
+import { createTask, editTask, filterTasks, deleteTask } from "../actions";
+import { getGroupedByStatus } from "../reducers";
+
 
 const TASK_STATUSES = ["Unstarted", "In Progress", "Completed"];
 
@@ -30,12 +35,20 @@ class TaskPage extends Component {
         })
     }
 
-    onCreateTask = () => {
-        this.props.onCreateTask({
-            title: '',
-            description: '',
+    onCreateTask = e => {
+        e.preventDefault();
+
+        this.props.createTask({
+            title: this.state.title,
+            description: this.state.description,
             projectId: this.props.currentProjectId,
         });
+
+        this.resetForm();
+    };
+
+    onStatusChange = (task, status) => {
+        this.props.editTask(task, { status });
     };
 
     onSearch = e => {
@@ -44,19 +57,24 @@ class TaskPage extends Component {
 
     renderTaskLists() {
         const {tasks} = this.props;
-        return tasks.map(statusTasks => {
-            const {status, tasks} = statusTasks;
+
+        return Object.keys(tasks).map(status => {
+            const tasksByStatus = tasks[status];
+
             return (<TaskList
                 key={status}
                 status={status}
-                tasks={tasks}
-                onEditTask={this.props.onEditTask}
-                onDeleteTask={this.props.onDeleteTask}
+                tasks={tasksByStatus}
+                onStautusChange={this.onStatusChange}
+                onEditTask={this.props.editTask}
+                onDeleteTask={this.props.deleteTask}
             />);
         });
     }
 
     render() {
+        console.log("Rendering TaskPage");
+
         if (this.props.isLoading) {
             return (
                 <div className="tasks-loading">
@@ -88,5 +106,27 @@ class TaskPage extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    const { isLoading } = state.projects;
+
+    return {
+        tasks: getGroupedByStatus(state),
+        currentProjectId: state.page.currentProjectId,
+        isLoading
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(
+        {
+            onSearch: filterTasks,
+            createTask,
+            editTask,
+            deleteTask
+        },
+        dispatch
+    );
+}
+
 export {TASK_STATUSES};
-export default TaskPage;
+export default connect(mapStateToProps, mapDispatchToProps)(TaskPage);

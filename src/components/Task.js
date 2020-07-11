@@ -13,7 +13,6 @@ class Task extends Component {
     }
 
     onEditing = () => {
-        console.log('in onEditing: ', this.state);
         this.props.onEditTask(
             Object.assign({}, this.props.task, {
                 title: this.state.title,
@@ -45,7 +44,7 @@ class Task extends Component {
     };
 
     onDeleteTask = () => {
-        this.props.onDeleteTask(this.props.task.id);
+        this.props.onDeleteTask(this.props.task.id, this.props.task.projectId);
     };
 
     render() {
